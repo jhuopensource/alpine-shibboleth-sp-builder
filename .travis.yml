@@ -8,6 +8,7 @@ script:
 ## Push Master Builds to Docker Registry ##
 ###########################################
 after_success:
-  - if [[ ( $TRAVIS_BRANCH == master ) && ( $TRAVIS_PULL_REQUEST == false ) ]];  then
+  - echo "Success - Branch($TRAVIS_BRANCH) Pull Request($TRAVIS_PULL_REQUEST) Tag($TRAVIS_TAG)"
+  - if [[ ( $TRAVIS_BRANCH == "master" ) && ( $TRAVIS_PULL_REQUEST == false ) ]];  then
       printf "Build Success\nInitiating Docker Hub Push \n" && echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin && docker push jhuopensource/alpine-shibboleth-sp-builder:latest;
     fi
